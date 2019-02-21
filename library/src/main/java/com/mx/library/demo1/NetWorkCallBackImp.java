@@ -1,4 +1,4 @@
-package com.mx.library;
+package com.mx.library.demo1;
 
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -6,6 +6,8 @@ import android.net.NetworkCapabilities;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import com.mx.library.Constants;
 
 /**
  * onAvailable,onLost 成对出现

@@ -1,4 +1,4 @@
-package com.mx.library;
+package com.mx.library.demo1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

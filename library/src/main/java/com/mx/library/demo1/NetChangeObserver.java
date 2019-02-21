@@ -1,4 +1,4 @@
-package com.mx.library;
+package com.mx.library.demo1;
 
 public interface NetChangeObserver {
 

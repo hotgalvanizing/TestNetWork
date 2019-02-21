@@ -1,9 +1,8 @@
-package com.mx.library;
+package com.mx.library.demo1;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkRequest;
 import android.os.Build;

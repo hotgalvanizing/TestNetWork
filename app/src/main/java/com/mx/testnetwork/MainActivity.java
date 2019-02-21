@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mx.library.Constants;
-import com.mx.library.NetChangeObserver;
-import com.mx.library.NetType;
-import com.mx.library.NetWork;
-import com.mx.library.NetWorkManager;
+import com.mx.library.demo1.NetType;
+import com.mx.library.demo1.NetWork;
+import com.mx.library.demo1.NetWorkManager;
 
 public class MainActivity extends AppCompatActivity {
 
