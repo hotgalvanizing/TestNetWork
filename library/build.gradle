@@ -30,7 +30,8 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.0.0-RC5'
     api 'io.reactivex.rxjava2:rxandroid:2.0.0-RC1'
 
-    api 'com.squareup.retrofit2:retrofit:2.1.0'
-    api 'com.squareup.retrofit2:converter-gson:2.1.0'
-    api 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
 }
