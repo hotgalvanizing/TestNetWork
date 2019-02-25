@@ -1,30 +1,33 @@
 package com.mx.testnetwork;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.GsonBuilder;
 import com.mx.library.retrofit.Book;
+import com.mx.library.retrofit.RetrofitService;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Main4Activity extends AppCompatActivity {
 
-    TextView textView,textView1;
+    TextView textView, textView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
         textView = findViewById(R.id.text_view);
-        textView = findViewById(R.id.text_view1);
+        textView1 = findViewById(R.id.text_view1);
 
     }
 
@@ -32,19 +35,19 @@ public class Main4Activity extends AppCompatActivity {
         Observable<String> observable = getObservable();
         Observer<String> observer = getObserver();
 //        observable.subscribe(observer);
-    observable.subscribe(new Consumer<String>() {
-        StringBuilder sb = new StringBuilder();
+        observable.subscribe(new Consumer<String>() {
+            StringBuilder sb = new StringBuilder();
 
-        @Override
-        public void accept(String s) throws Exception {
-             sb.append(s);
-             textView.setText(sb);
-        }
-    });
+            @Override
+            public void accept(String s) throws Exception {
+                sb.append(s);
+                textView.setText(sb);
+            }
+        });
 
     }
 
-    public Observable<String> getObservable(){
+    public Observable<String> getObservable() {
 
 //        return Observable.create(new ObservableOnSubscribe<String>() {
 //            @Override
@@ -54,11 +57,11 @@ public class Main4Activity extends AppCompatActivity {
 //            }
 //        });
 
-        Observable observable = Observable.just("test1","test2");
+        Observable observable = Observable.just("test1", "test2");
         return observable;
     }
 
-    public Observer<String> getObserver(){
+    public Observer<String> getObserver() {
 
         Observer<String> observer = new Observer<String>() {
             @Override
@@ -85,33 +88,25 @@ public class Main4Activity extends AppCompatActivity {
     }
 
     public void onClickButton1(View view) {
-        Observable.create(new ObservableOnSubscribe<Book>() {
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.douban.com/v2/")
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//支持RxJava
+                .build();
+
+        RetrofitService service = retrofit.create(RetrofitService.class);
+
+        Observable<Book> observable = service.getSearchBook("金瓶梅", null, 0, 1);
+
+        observable.subscribe(new Consumer<Book>() {
             @Override
-            public void subscribe(ObservableEmitter<Book> e) throws Exception {
-                Book book = new Book();
-
-                e.onNext(book);
-            }
-        }).subscribe(new Observer<Book>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Book value) {
-                textView1.setText(value.getBooks().get(0).getAlt_title());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
+            public void accept(Book book) throws Exception {
+                textView1.setText(book.getBooks().get(0).getAlt_title());
             }
         });
+
+
     }
 }
