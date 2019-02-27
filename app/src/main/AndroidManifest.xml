@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <!-- <receiver android:name="com.mx.library.demo1.NetStateReceiver"> -->
         <!-- <intent-filter> -->
@@ -32,7 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main3Activity" />
-        <activity android:name=".Main4Activity"></activity>
+        <activity android:name=".Main4Activity" />
+        <activity android:name=".Main5Activity"></activity>
     </application>
 
 </manifest>
